@@ -587,7 +587,7 @@
   }
 
   .mb-20 {
-    margin-bottom: calc(var(--spacing) * 20);
+    margin-top: calc(var(--spacing) * 20);
   }
 
   .mb-24 {
