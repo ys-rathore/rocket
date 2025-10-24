@@ -1,0 +1,14 @@
+{
+  "name": "rocket-dynamic-sample",
+  "version": "1.0.0",
+  "description": "A basic dynamic counter application using Node.js and Express.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "author": "ys-rathore",
+  "license": "ISC"
+}
