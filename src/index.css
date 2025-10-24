@@ -2008,3 +2008,18 @@ html {
     opacity: .5;
   }
 }
+
+/* === Custom mesh and background layering === */
+.mesh-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: perspective(800px) rotateX(45deg);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+body {
+  background-color: black;
+  background: radial-gradient(circle at 50% 60%, #000 20%, #050505 80%);
+}
