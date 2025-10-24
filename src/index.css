@@ -1976,7 +1976,7 @@ html {
 
 @property --tw-inset-ring-shadow {
   syntax: "*";
-  inherits: false;
+  inherits: false
   initial-value: 0 0 #0000;
 }
 
