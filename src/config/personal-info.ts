@@ -3,7 +3,7 @@
 
 export const personalInfo = {
   // Basic Info
-  name: "YUVRAJ SINGH RATHORE",
+  name: "YUVRAJ SINGH RATHORE 🌞",
   title: "IT Student & Future Tech Leader",
   tagline: "Building Tomorrow's Solutions Today",
   
