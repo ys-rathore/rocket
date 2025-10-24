@@ -1,8 +1,0 @@
-# Ignore dependencies and development artifacts to keep the final image clean
-
-node_modules
-npm-debug.log
-.git
-.gitignore
-.env
-/dist
