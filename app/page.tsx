@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <main className="relative w-full h-screen overflow-hidden bg-black">
-      {/* ✅ Spline scene (hidden until loader finishes) */}
+      {/* ✅ 3D Scene - fades in after loader */}
       <div
         className={`transition-opacity duration-700 ${
           isLoading ? "opacity-0" : "opacity-100"
@@ -22,25 +22,42 @@ export default function Home() {
         <SplineViewer />
       </div>
 
-      {/* ✅ Neon loader overlay */}
+      {/* ✅ Glass gradient loader overlay */}
       {isLoading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black transition-opacity duration-700">
-          <div className="loader mb-4"></div>
-          <p className="text-cyan-400 text-lg font-semibold tracking-wide animate-pulse">
-            Launching YSR Space...
+        <div
+          className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-700 ${
+            isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+            backdropFilter: "blur(18px) saturate(180%)",
+            WebkitBackdropFilter: "blur(18px) saturate(180%)",
+          }}
+        >
+          <div className="loader mb-5"></div>
+          <p className="gradient-text text-xl md:text-2xl font-semibold tracking-wider animate-fadeIn">
+            LAUNCHING OUR SPACE....
           </p>
         </div>
       )}
 
-      {/* ✅ Custom spinner styles */}
+      {/* ✅ CSS styles */}
       <style jsx>{`
         .loader {
-          border: 4px solid rgba(0, 255, 255, 0.1);
-          border-top: 4px solid #00ffff;
+          border: 4px solid rgba(255, 255, 255, 0.15);
+          border-top: 4px solid rgba(255, 255, 255, 0.85);
           border-radius: 50%;
-          width: 48px;
-          height: 48px;
-          animation: spin 1s linear infinite, glow 1.3s ease-in-out infinite alternate;
+          width: 52px;
+          height: 52px;
+          animation: spin 1.2s linear infinite, glow 1.5s ease-in-out infinite alternate;
+        }
+
+        .gradient-text {
+          background: linear-gradient(90deg, #ffffff, #dcdcdc, #ffffff);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
         }
 
         @keyframes spin {
@@ -51,10 +68,21 @@ export default function Home() {
 
         @keyframes glow {
           from {
-            box-shadow: 0 0 10px #00ffff33;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
           }
           to {
-            box-shadow: 0 0 30px #00ffffaa;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
       `}</style>
