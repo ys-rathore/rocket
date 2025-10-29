@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YSR SPACE</title>
-  <link rel="icon" href="favicon.png" />
-  
-  <!-- Spline Runtime -->
-  <script type="module" src="https://unpkg.com/@splinetool/runtime@1.10.89/build/runtime.js"></script>
-  
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
-    spline-viewer {
-      width: 100vw;
-      height: 100vh;
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <!-- Your Spline 3D Scene -->
-  <spline-viewer 
-    url="https://prod.spline.design/nvSwDpk1ogJtgZO8/scene.splinecode">
-  </spline-viewer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YSR SPACE</title>
+    <link rel="icon" href="favicon.png" />
+
+    <!-- ✅ Correct Spline viewer package -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: #0a0a0a; /* Try #fff if still black */
+      }
+      spline-viewer {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ✅ Your live 3D scene -->
+    <spline-viewer
+      loading-anim-type="spinner-big-dark"
+      url="https://prod.spline.design/nvSwDpk1ogJtgZO8/scene.splinecode">
+    </spline-viewer>
+  </body>
 </html>
