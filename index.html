@@ -17,19 +17,30 @@
 
       spline-viewer {
         position: fixed;
-        top: 0;
-        left: 0;
+        inset: 0;
         width: 100vw;
         height: 100vh;
         border: none;
         display: block;
       }
 
-      /* ✅ Hide Spline watermark */
-      spline-viewer::part(logo) {
+      /* Hide watermark inside Spline’s shadow DOM (mobile + desktop) */
+      spline-viewer::part(logo),
+      spline-viewer::part(watermark) {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
+      }
+
+      /* Hide any global watermark divs injected by Spline (desktop fallback) */
+      [class*="spline-watermark"],
+      [class*="SplineWatermark"],
+      [alt*="Built with Spline"],
+      img[alt*="Spline"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
       }
     </style>
   </head>
@@ -39,7 +50,6 @@
       src="https://unpkg.com/@splinetool/viewer@1.10.89/build/spline-viewer.js">
     </script>
 
-    <!-- ✅ Fullscreen 3D Scene -->
     <spline-viewer
       loading-anim-type="none"
       url="https://prod.spline.design/nvSwDpk1ogJtgZO8/scene.splinecode">
