@@ -2,29 +2,82 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
-export default function LoadingScreen() {
-  const [visible, setVisible] = useState(true);
+type Props = {
+  visible?: boolean | null; // if undefined, uses internal timer
+  durationMs?: number;
+};
 
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 2000); // 2-second loading
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!visible) return null;
-
+function LoadingContent() {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-700">
-      <Image
-        src="/loading-bg.png"     // we’ll place your uploaded image here
-        alt="Loading"
-        fill
-        style={{ objectFit: "cover", filter: "blur(6px)" }}
-        priority
-      />
-      <h2 className="text-white text-xl font-semibold z-10 tracking-widest">
-        Loading YSpace...
-      </h2>
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md transition-opacity duration-300">
+      {/* Background blur image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/loading-bg.png"
+          alt="Background"
+          fill
+          priority
+          style={{ objectFit: "cover", filter: "blur(6px)" }}
+        />
+      </div>
+
+      {/* Spinner + text */}
+      <div className="z-10 flex flex-col items-center gap-5">
+        <div
+          className="rounded-full bg-white/10 p-5"
+          aria-hidden
+          style={{ backdropFilter: "blur(6px)" }}
+        >
+          <svg
+            className="h-10 w-10 animate-spin text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            />
+          </svg>
+        </div>
+
+        <h2 className="text-white text-xl font-semibold tracking-wider">
+          Loading YSpace...
+        </h2>
+      </div>
     </div>
   );
+}
+
+export default function LoadingScreenPortal({
+  visible: visibleProp = null,
+  durationMs = 2000,
+}: Props) {
+  const [internalVisible, setInternalVisible] = useState(true);
+  const visible =
+    visibleProp === null || visibleProp === undefined
+      ? internalVisible
+      : visibleProp;
+
+  useEffect(() => {
+    if (visibleProp === null || visibleProp === undefined) {
+      const timer = setTimeout(() => setInternalVisible(false), durationMs);
+      return () => clearTimeout(timer);
+    }
+  }, [visibleProp, durationMs]);
+
+  if (!visible) return null;
+  if (typeof document === "undefined") return null; // SSR safety
+
+  return createPortal(<LoadingContent />, document.body);
 }
