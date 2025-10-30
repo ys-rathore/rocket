@@ -1,24 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import SplineViewer from "@/components/spline-viewer";
+import { useState } from "react";
+import Spline from "@splinetool/react-spline";
 import LoadingScreenPortal from "@/components/LoadingScreenPortal";
 
 export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    // You can adjust duration or use real onLoad from Spline later
-    const timer = setTimeout(() => setLoaded(true), 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <main className="relative w-full h-screen overflow-hidden bg-black">
+    <main className="relative w-full h-screen overflow-hidden bg-black text-white">
       {/* Spline scene */}
-      <SplineViewer />
+      <Spline
+        scene="https://prod.spline.design/your-spline-url/scene.splinecode"
+        onLoad={() => setLoaded(true)}
+      />
 
-      {/* Loading overlay controlled by state */}
+      {/* Loader overlay (visible until Spline fully loads) */}
       <LoadingScreenPortal visible={!loaded} />
     </main>
   );
