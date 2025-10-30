@@ -8,8 +8,26 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'YSpace',
-  description: 'Lets Creat it !',
+  description: 'Lets Create it!',
   generator: 'Space.in',
+  icons: {
+    icon: '/favicon.png', // ✅ Your custom favicon
+  },
+  openGraph: {
+    title: 'YSpace',
+    description: 'Lets Create it!',
+    url: 'https://yourdomain.com', // optional — replace with your actual domain
+    siteName: 'YSpace',
+    images: [
+      {
+        url: '/favicon.png',
+        width: 512,
+        height: 512,
+        alt: 'YSpace Logo',
+      },
+    ],
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
@@ -19,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className="font-sans antialiased">
         {children}
         <Analytics />
       </body>
