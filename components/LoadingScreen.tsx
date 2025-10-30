@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 type Props = {
-  visible?: boolean | null; // if undefined, uses internal timer
-  durationMs?: number;
+  visible: boolean;
 };
 
 function LoadingContent() {
@@ -59,25 +57,7 @@ function LoadingContent() {
   );
 }
 
-export default function LoadingScreenPortal({
-  visible: visibleProp = null,
-  durationMs = 2000,
-}: Props) {
-  const [internalVisible, setInternalVisible] = useState(true);
-  const visible =
-    visibleProp === null || visibleProp === undefined
-      ? internalVisible
-      : visibleProp;
-
-  useEffect(() => {
-    if (visibleProp === null || visibleProp === undefined) {
-      const timer = setTimeout(() => setInternalVisible(false), durationMs);
-      return () => clearTimeout(timer);
-    }
-  }, [visibleProp, durationMs]);
-
-  if (!visible) return null;
-  if (typeof document === "undefined") return null; // SSR safety
-
+export default function LoadingScreenPortal({ visible }: Props) {
+  if (!visible || typeof document === "undefined") return null;
   return createPortal(<LoadingContent />, document.body);
 }
