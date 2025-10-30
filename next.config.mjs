@@ -1,11 +1,7 @@
-import nextPlugin from "@cloudflare/next-on-pages/next-plugin";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    typedRoutes: true,
-  },
-  output: "export",
+  swcMinify: true,
 };
 
-export default nextPlugin(nextConfig);
+export default nextConfig;
