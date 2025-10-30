@@ -1,15 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  eslint: {
-    ignoreDuringBuilds: true,
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.splinecode$/i,
+      type: "asset/resource",
+    });
+    return config;
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-}
+};
 
-export default nextConfig
+export default nextConfig;
