@@ -1,16 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-type Props = {
-  visible: boolean;
+type LoadingScreenProps = {
+  /** Control visibility externally. If omitted, uses internal timer. */
+  visible?: boolean | null;
+  /** Duration (ms) before auto-hide when uncontrolled */
+  durationMs?: number;
 };
 
-function LoadingContent() {
+function LoadingOverlay() {
   return (
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md transition-opacity duration-300">
-      {/* Background blur image */}
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md transition-opacity duration-500">
+      {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/loading-bg.png"
@@ -21,7 +25,7 @@ function LoadingContent() {
         />
       </div>
 
-      {/* Spinner + text */}
+      {/* Spinner + Text */}
       <div className="z-10 flex flex-col items-center gap-5">
         <div
           className="rounded-full bg-white/10 p-5"
@@ -57,7 +61,23 @@ function LoadingContent() {
   );
 }
 
-export default function LoadingScreenPortal({ visible }: Props) {
+export default function LoadingScreen({
+  visible: visibleProp = null,
+  durationMs = 2000,
+}: LoadingScreenProps) {
+  const [internalVisible, setInternalVisible] = useState(true);
+  const visible =
+    visibleProp === null || visibleProp === undefined
+      ? internalVisible
+      : visibleProp;
+
+  useEffect(() => {
+    if (visibleProp === null || visibleProp === undefined) {
+      const timer = setTimeout(() => setInternalVisible(false), durationMs);
+      return () => clearTimeout(timer);
+    }
+  }, [visibleProp, durationMs]);
+
   if (!visible || typeof document === "undefined") return null;
-  return createPortal(<LoadingContent />, document.body);
+  return createPortal(<LoadingOverlay />, document.body);
 }
