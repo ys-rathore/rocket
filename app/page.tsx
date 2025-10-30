@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import SplineViewer from "@/components/spline-viewer";
-import LoadingScreenPortal from "@/components/LoadingScreenPortal";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
@@ -15,10 +15,10 @@ export default function HomePage() {
         onLoad={() => setLoaded(true)}
       />
 
-      {/* Loading overlay */}
-      <LoadingScreenPortal visible={!loaded} />
+      {/* Universal loading overlay */}
+      <LoadingScreen visible={!loaded} />
 
-      {/* Optional content after model loads */}
+      {/* Main UI after load */}
       {loaded && (
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4">
           <button className="px-6 py-2 rounded-full bg-white text-black font-semibold shadow-md hover:shadow-lg transition">
