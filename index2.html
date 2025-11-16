@@ -47,6 +47,9 @@
     .socials {
       margin-top: 40px;
       display: flex;
+  .socials {
+      margin-top: 40px;
+      display: flex;
       gap: 25px;
       align-items: center; /* Ensures all buttons align vertically */
     }
@@ -63,6 +66,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      text-decoration: none; /* Removes underline from <a> tag */
     }
 
     .social-btn:hover {
@@ -77,14 +81,23 @@
       filter: brightness(0) invert(1);
     }
     
-    /* Style for the new "HOME" text button */
-    .home-text-btn {
-        text-decoration: none;
-        color: white;
-        font-size: 13px; /* Small, bold text to fit the circle */
-        font-weight: 600;
-        letter-spacing: 1px;
+    /* This is the new style for the special Home button */
+    .home-btn-special {
+        background: rgba(255, 223, 0, 0.25); /* Yellow-ish attention color */
+        border: 1px solid rgba(255, 223, 0, 0.5);
     }
+    
+    .home-btn-special:hover {
+        background: rgba(255, 223, 0, 0.5); /* Brighter yellow on hover */
+        box-shadow: 0 0 20px rgba(255, 223, 0, 0.6);
+    }
+    
+    .home-btn-special img {
+        width: 30px; /* Slightly larger home icon */
+        height: 30px;
+        filter: brightness(0) invert(1);
+    }
+
 
     footer {
       position: absolute;
@@ -98,9 +111,9 @@
   <h1>YUVRAJ SINGH</h1>
 
   <div class="socials">
-    <!-- New "HOME" button -->
-    <a href="/code/" class="social-btn home-text-btn" title="My Code Projects">
-      HOME
+    <!-- New "HOME" Icon Button -->
+    <a href="/code/" class="social-btn home-btn-special" title="My Code Projects">
+      <img src="https://cdn.jsdelivr.net/gh/feathericons/feather/icons/home.svg" alt="Home">
     </a>
 
     <a href="https://www.linkedin.com/in/ysrathore09" target="_blank" class="social-btn">
