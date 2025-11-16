@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAVA 16/11 - Elegant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@400;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --title-color: #4a148c;
+            --bg-color-1: #f0f9ff;
+            --bg-color-2: #c3fdf0;
+            --container-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(255, 255, 255, 0.8);
+            --text-color: #333;
+            --code-bg: #fdfdfd;
+            --code-text: #2d2d2d;
+            --code-keyword: #c7254e;
+            --code-type: #0086b3;
+            --code-method: #50a14f;
+            --code-string: #d14;
+            --code-variable: #990055;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(-45deg, var(--bg-color-1), var(--bg-color-2), #e0c3fc, #8ec5fc);
+            background-size: 400% 400%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+            color: var(--text-color);
+            position: relative;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--container-bg);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            position: relative;
+            z-index: 3;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5rem;
+            margin: 0 0 40px 0;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            color: var(--title-color);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        h1:hover {
+            transform: scale(1.03);
+        }
+
+        .code-wrapper {
+            position: relative;
+            background-color: var(--code-bg);
+            overflow: hidden;
+            text-align: left;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f7f7f7;
+            padding: 12px 20px;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            font-family: 'Lato', sans-serif;
+        }
+        
+        .code-header::before {
+            content: '● ● ●';
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        .copy-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Lato', sans-serif;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(106, 17, 203, 0.2);
+        }
+
+        .copy-btn:hover {
+            background-color: var(--secondary-color);
+            box-shadow: 0 6px 15px rgba(37, 117, 252, 0.3);
+        }
+
+        pre {
+            margin: 0;
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            color: var(--code-text);
+            font-size: 15px;
+            line-height: 1.6;
+            display: block;
+            white-space: pre;
+        }
+
+        .keyword { color: var(--code-keyword); font-weight: 600; }
+        .type { color: var(--code-type); }
+        .method { color: var(--code-method); }
+        .variable { color: var(--code-variable); }
+        .string { color: var(--code-string); }
+        .comment { color: #969896; font-style: italic; }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>JAVA 16/11</h1>
+
+        <div class="code-wrapper">
+            <div class="code-header">
+                <span>Sample7.java</span>
+                <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+            </div>
+            <pre><code id="codeBlock">
+<span class="keyword">class</span> <span class="type">Room</span>
+{
+    <span class="keyword">int</span> length;
+    <span class="keyword">int</span> width;
+    
+    <span class="type">Room</span>(<span class="keyword">int</span> L, <span class="keyword">int</span> W)
+    { 
+        length = L;
+        width = W;
+    }
+    
+    <span class="keyword">int</span> <span class="method">area</span>()
+    {
+        <span class="keyword">return</span> (length * width);
+    }
+}
+
+<span class="keyword">class</span> <span class="type">BedRoom</span> <span class="keyword">extends</span> <span class="type">Room</span>
+{
+    <span class="keyword">int</span> height;
+    
+    <span class="type">BedRoom</span>(<span class="keyword">int</span> L, <span class="keyword">int</span> W, <span class="keyword">int</span> H)
+    {
+        <span class="keyword">super</span>(L, W);
+        height = H;
+    }
+    
+    <span class="keyword">int</span> <span class="method">volume</span>()
+    {
+        <span class="keyword">return</span> (length * width * height);
+    }
+}
+
+<span class="keyword">class</span> <span class="type">Sample7</span>
+{
+    <span class="keyword">public static void</span> <span class="method">main</span>(String args[])
+    { 
+        <span class="type">BedRoom</span> obj1 = <span class="keyword">new</span> <span class="type">BedRoom</span>(2, 3, 4);
+
+        System.out.println(<span class="string">"Volume: "</span> + obj1.volume());
+        System.out.println(<span class="string">"Area: "</span> + obj1.area());
+    }
+}
+            </code></pre>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeText = document.getElementById("codeBlock").innerText;
+            
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.querySelector(".copy-btn");
+                btn.textContent = "Copied!";
+                btn.style.backgroundColor = "#28a745";
+                btn.style.boxShadow = "0 0 20px #28a745";
+                
+                setTimeout(() => {
+                    btn.textContent = "Copy Code";
+                    btn.style.backgroundColor = "var(--primary-color)";
+                    btn.style.boxShadow = "0 4px 10px rgba(106, 17, 203, 0.2)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                const btn = document.querySelector(".copy-btn");
+                btn.textContent = "Failed!";
+                btn.style.backgroundColor = "#dc3545";
+                btn.style.boxShadow = "0 0 20px #dc3545";
+                
+                setTimeout(() => {
+                    btn.textContent = "Copy Code";
+                    btn.style.backgroundColor = "var(--primary-color)";
+                    btn.style.boxShadow = "0 4px 10px rgba(106, 17, 203, 0.2)";
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
